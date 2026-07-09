@@ -1,0 +1,21 @@
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from datetime import datetime
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str = Field(min_length=6, max_length=72)
+
+class UserResponse(BaseModel):
+    id: int
+    email: str
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str = Field(min_length=6, max_length=72)
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str 
